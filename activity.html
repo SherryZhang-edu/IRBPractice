@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>You Are the IRB | Research Ethics Challenge</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #17283a;
+            --muted: #526579;
+            --accent: #17665d;
+            --paper: #f3f6f5;
+            --line: #d5dfdf
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font: 16px/1.65 system-ui, sans-serif
+        }
+
+        header {
+            background: #142f39;
+            color: white;
+            padding: 32px max(20px, calc((100vw - 960px)/2))
+        }
+
+        header p {
+            color: #c4dcd9;
+            margin: 0
+        }
+
+        h1 {
+            font-size: clamp(26px, 5vw, 42px);
+            line-height: 1.15;
+            margin: 8px 0 14px
+        }
+
+        h2 {
+            line-height: 1.25
+        }
+
+        main {
+            max-width: 1160px;
+            margin: auto;
+            padding: 24px 18px 60px
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: clamp(18px, 4vw, 32px);
+            margin: 18px 0
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--accent)
+        }
+
+        header .eyebrow {
+            color: #a5e2d4
+        }
+
+        .muted,
+        small {
+            color: var(--muted)
+        }
+
+        button {
+            font: inherit;
+            font-weight: 650;
+            border: 1px solid var(--accent);
+            border-radius: 9px;
+            padding: 10px 17px;
+            background: var(--accent);
+            color: white;
+            cursor: pointer
+        }
+
+        button.secondary {
+            background: white;
+            color: var(--accent)
+        }
+
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid #c17c26;
+            outline-offset: 3px
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px
+        }
+
+        label.option {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            margin: 8px 0;
+            align-items: flex-start
+        }
+
+        input[type=radio] {
+            margin-top: 7px;
+            accent-color: var(--accent)
+        }
+
+        textarea,
+        input[type=text] {
+            width: 100%;
+            font: inherit;
+            border: 1px solid #87999f;
+            border-radius: 8px;
+            padding: 10px;
+            background: white;
+            color: var(--ink)
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical
+        }
+
+        fieldset {
+            border: 0;
+            padding: 0;
+            margin: 18px 0
+        }
+
+        legend {
+            font-weight: 700
+        }
+
+        progress {
+            width: 100%;
+            accent-color: var(--accent);
+            height: 12px
+        }
+
+        .steps {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .step {
+            font-size: 12px;
+            padding: 4px 9px;
+            border-radius: 20px;
+            background: #e5eceb
+        }
+
+        .step.active {
+            background: #17665d;
+            color: white
+        }
+
+        .scenario {
+            font-size: 19px;
+            background: #edf4f2;
+            border-left: 4px solid var(--accent);
+            padding: 16px
+        }
+
+        .feedback {
+            background: #edf4f2;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 16px
+        }
+
+        .error {
+            color: #9b2626;
+            font-weight: 600
+        }
+
+        .checklist li {
+            margin: 8px 0
+        }
+
+        details {
+            margin: 14px 0
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 650
+        }
+
+        footer {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px
+        }
+
+        .grid div {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px
+        }
+
+        a {
+            color: var(--accent)
+        }
+
+        @media print {
+            header {
+                background: white;
+                color: black
+            }
+
+            header p,
+            header .eyebrow {
+                color: black
+            }
+
+            button,
+            .steps,
+            progress {
+                display: none
+            }
+
+            .panel {
+                break-inside: avoid
+            }
+        }
+
+        .case-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 22px;
+            align-items: start
+        }
+
+        .reference {
+            position: sticky;
+            top: 16px;
+            font-size: 14px
+        }
+
+        .reference h3 {
+            margin-top: 0
+        }
+
+        .reference p {
+            margin: 5px 0 16px
+        }
+
+        .reference .category {
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+            margin: 16px 0
+        }
+
+        .reference .category:nth-of-type(2) {
+            border-color: #a66a15
+        }
+
+        .reference .category:nth-of-type(3) {
+            border-color: #a33c3c
+        }
+
+        @media(max-width:760px) {
+            .case-layout {
+                display: flex;
+                flex-direction: column;
+                gap: 0
+            }
+
+            .reference {
+                position: static;
+                order: -1;
+                width: 100%;
+                margin-bottom: 0
+            }
+
+            .reference .category {
+                margin: 8px 0
+            }
+
+            .reference p {
+                margin: 3px 0
+            }
+
+            .case-layout>section {
+                width: 100%
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="eyebrow">Human subjects research · Independent activity</div>
+        <h1>You Are the IRB</h1>
+        <p>Research Ethics Challenge · UX & Game Research</p>
+    </header>
+    <main>
+        <div id="status" aria-live="polite"></div>
+        <div id="app"></div>
+
+    </main>
+    <script>'use strict';
+        const cases = [
+            ['Two Tutorial Versions', 'Participants test a game tutorial but are not told which version they are seeing to avoid bias.', 'Participants know they are evaluating a tutorial, what data are collected, and that different versions may be used. No false statement is made.', 'A', 'Approve', 'Blinding or withholding the assignment is not automatically deception. The information needed for informed consent is disclosed. Approval here means the design is acceptable in this simulation, subject to ordinary required review.'],
+            ['Emotional Recording', 'A game uses a webcam to analyze facial expressions during frustration events. This is not mentioned in the consent form.', 'The camera records identifiable video and the research team intends to retain it. Participants have not agreed to this recording or its use.', 'C', 'Require modifications', 'Undisclosed identifiable recording raises privacy and consent concerns. Disclose collection, purpose, retention and access; obtain appropriate consent, or seek a specifically justified and authorized exception. Not saving video would not automatically eliminate privacy concerns.'],
+            ['Impossible Level', 'Researchers insert an unwinnable level so they can measure rage-quit behavior. Participants are not told the level is impossible.', 'Adult participants are told the level can be completed, although it cannot. They are warned about mild frustration, can stop at any time without losing payment, and play for at most three minutes. The team justifies why a winnable level cannot answer the question and plans immediate debriefing.', 'B', 'Approve', 'The false claim about the level is deception. Limited exposure, voluntary withdrawal, a scientific justification and debriefing make it potentially allowable, subject to applicable approval.'],
+            ['Hidden Hypothesis', 'Participants know they are in a study and everything is logged. The researcher does not tell them the real hypothesis: preference for random versus fixed rewards.', 'The researcher accurately explains gameplay, data collection, risks and participation rights, but falsely tells participants the study is about visual interface preferences. Adults can stop at any time, the task is low risk, and the team has justified the need for the cover story and plans a debriefing.', 'B', 'Approve', 'The false cover story is intentional deception, unlike simply withholding a hypothesis. It may be ethically justified if the stated safeguards and applicable approval requirements are met.'],
+            ['Surprise Horror Scene', 'A VR playtest includes a sudden, intense horror sequence. Participants are not warned about disturbing content.', 'The scene contains frightening images and loud sounds. Participants can remove the headset but receive no advance warning of these risks.', 'C', 'Require modifications', 'Unexpected timing can be preserved without hiding material risks. Warn about frightening content and loud sounds, provide a safe stopping procedure and appropriate safeguards, without revealing exactly when the scare occurs.'],
+            ['Mandatory Participation', 'A professor requires students to participate in a research study to receive their course grade, with no alternative assignment.', 'The professor recruits students from their own class. Students are accurately told the requirement and fear losing course credit if they decline.', 'C', 'Require modifications', 'There need not be a lie for research to be unethical. Authority and grade pressure threaten voluntariness. Provide an equivalent nonresearch alternative and minimize instructor influence.'],
+            ['Withdrawal Penalty', 'Participants are fully informed about the study but are told they will lose compensation already earned if they withdraw early.', 'Payment is earned in hourly increments, but the researcher will withhold all earned payment if a participant stops before the final task.', 'C', 'Require modifications', 'Disclosure does not make an unfair withdrawal penalty ethical. Protect voluntary withdrawal and pay earned compensation; clearly distinguish any appropriate completion incentive from earned payment.'],
+            ['Public Leaderboard', 'Participants agree to have gameplay performance recorded privately, but the researcher later publishes their names and scores on a public leaderboard.', 'The consent form explicitly promises confidentiality. The researcher has not asked for permission to publish identifiable scores.', 'C', 'Require modifications', 'This breaches confidentiality and the agreed scope of data use. Do not publish identifiable scores without appropriate authorization; use aggregate or properly de-identified results. If disclosure already happened, follow institutional reporting and mitigation procedures.']
+        ];
+        const categories = ['A — Ethical without deception', 'B — Potentially allowable deception', 'C — Unethical as designed'];
+        const definitions = ['The study respects participants’ rights and welfare without intentionally misleading them.', 'The study intentionally misleads participants, but the deception may be justified by scientific necessity, appropriate safeguards, applicable approval and debriefing.', 'The study violates ethical principles, whether or not deception is involved.'];
+        const key = 'irb-challenge-v2'; let state = { page: 'learn', i: 0, answers: [], name: '', redesign: '', reflection: '' }; let storageOK = true; try { const s = JSON.parse(localStorage.getItem(key)); if (s && Array.isArray(s.answers) && Number.isInteger(s.i) && s.i >= 0 && s.i < cases.length) state = s } catch (e) { storageOK = false } const app = document.getElementById('app'); const status = document.getElementById('status'); const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); function save() { try { localStorage.setItem(key, JSON.stringify(state)) } catch (e) { storageOK = false } } function go(page) { state.page = page; save(); render(); window.scrollTo(0, 0); document.getElementById('heading')?.focus() }
+        function radio(name, options, value) { return options.map((x, i) => `<label class="option"><input type="radio" name="${name}" value="${esc(x)}" ${x === value ? 'checked' : ''} required><span>${esc(x)}</span></label>`).join('') }
+        function area(id, label, value = '') { return `<p><label for="${id}"><strong>${label}</strong></label><textarea id="${id}" required>${esc(value)}</textarea></p>` }
+
+        function reference() { return `<aside class="panel reference" aria-label="Classification reference"><h3>Classification guide</h3>${categories.map((x, i) => `<div class="category"><strong>${x}</strong><p>${definitions[i]}</p></div>`).join('')}</aside>` }
+        function render() {
+            const done = state.answers.filter(a => a && a.classification).length; status.innerHTML = `<div class="steps">${['Learn', 'Classify', 'Redesign', 'Reflect'].map((x, i) => `<span class="step ${['learn', 'classify', 'redesign', 'finish'].indexOf(state.page) === i ? 'active' : ''}">${x}</span>`).join('')}</div><p class="muted">${done} of ${cases.length} cases completed ${storageOK ? ' · Progress saved locally' : ' · Local saving unavailable'}</p><progress max="${cases.length}" value="${done}" aria-label="Cases completed"></progress>`; let c = cases[state.i], a = state.answers[state.i] || {};
+            if (state.page === 'learn') { app.innerHTML = `<section class="panel"><div class="eyebrow">Briefing</div><h2 id="heading" tabindex="-1">Your mission</h2><p>You are a member of a simulated Institutional Review Board (IRB). For each scenario, choose one classification and explain your reasoning. After submitting, compare your answer with the teaching feedback.</p><div class="grid">${categories.map((x, i) => `<div><strong>${x}</strong><p>${definitions[i]}</p></div>`).join('')}</div><p>Consider research necessity, risk, informed consent, privacy, voluntary participation and safeguards.</p><label for="student">Name or student ID (optional)</label><input id="student" type="text" value="${esc(state.name)}"><div class="actions"><button id="start">Start challenge</button></div></section>`; document.getElementById('start').onclick = () => { state.name = document.getElementById('student').value; go('classify') }; return }
+            if (state.page === 'classify') { app.innerHTML = `<div class="case-layout"><section class="panel"><div class="eyebrow">Case ${state.i + 1} / ${cases.length}</div><h2 id="heading" tabindex="-1">${c[0]}</h2><div class="scenario">${c[1]} ${c[2]}</div>${a.classification ? `<p><strong>Your classification:</strong> ${esc(a.classification)}</p><p>${esc(a.reason)}</p><div class="feedback"><h3>Teaching feedback</h3><p><strong>Suggested classification:</strong> ${categories['ABC'.indexOf(c[3])]}</p><p>${c[5]}</p></div><div class="actions"><button id="next">${state.i === cases.length - 1 ? 'Continue to redesign' : 'Next case'}</button></div>` : `<form id="form"><fieldset><legend>How would you classify the study?</legend>${radio('classification', categories, '')}</fieldset>${area('reason', 'Explain your reasoning. Which ethical principles are relevant?')}<button type="submit">Submit & view feedback</button></form>`}</section>${reference()}</div>`; if (a.classification) { document.getElementById('next').onclick = () => { if (state.i === cases.length - 1) go('redesign'); else { state.i++; go('classify') } } } else { document.getElementById('form').onsubmit = e => { e.preventDefault(); const reason = document.getElementById('reason'); if (!reason.value.trim()) { reason.setCustomValidity('Please explain your reasoning.'); reason.reportValidity(); return } state.answers[state.i] = { classification: new FormData(e.target).get('classification'), reason: reason.value.trim() }; go('classify') }; document.getElementById('reason').oninput = e => e.target.setCustomValidity('') } return }
+            if (state.page === 'redesign') { app.innerHTML = `<section class="panel"><div class="eyebrow">Apply your learning</div><h2 id="heading" tabindex="-1">Redesign a study</h2><p>Choose a problematic case. Preserve the original research question while protecting participants.</p><form id="form"><fieldset><legend>Choose a case</legend>${radio('case', cases.map(x => x[0]), state.redesignCase)}</fieldset>${area('redesign', 'Describe your revised procedure, consent, safeguards, withdrawal and debriefing (if relevant).', state.redesign)}${area('reflection', 'What changed in your understanding of deception? Explain one principle you will apply in your own research.', state.reflection)}<button type="submit">Finish challenge</button></form></section>`; document.getElementById('form').onsubmit = e => { e.preventDefault(); state.redesignCase = new FormData(e.target).get('case'); state.redesign = document.getElementById('redesign').value.trim(); state.reflection = document.getElementById('reflection').value.trim(); go('finish') }; return }
+            app.innerHTML = `<section class="panel"><div class="eyebrow">Completed</div><h2 id="heading" tabindex="-1">Your research ethics portfolio</h2><p>You reviewed ${done} cases. Ethical research is not simply about telling the truth: it requires justified methods and respect for autonomy and welfare.</p><p>Export your responses and submit the file through your instructor's designated course system. This activity does not automatically send anything to your instructor.</p><div class="actions"><button id="export">Download responses (.txt)</button><button class="secondary" onclick="window.print()">Print / Save as PDF</button></div></section><section class="panel"><h2>Your responses</h2>${cases.map((c, i) => { let a = state.answers[i] || {}; return `<details open><summary>${i + 1}. ${c[0]}</summary><p><strong>Classification:</strong> ${esc(a.classification)} — ${esc(a.reason)}</p><p><strong>Teaching feedback:</strong> ${c[5]}</p></details>` }).join('')}<h3>Redesign: ${esc(state.redesignCase)}</h3><p>${esc(state.redesign)}</p><h3>Reflection</h3><p>${esc(state.reflection)}</p><button id="reset" class="secondary">Clear progress and restart</button></section>`; document.getElementById('export').onclick = () => { let out = ['You Are the IRB — Research Ethics Challenge', 'Student: ' + state.name, ...cases.map((c, i) => { let a = state.answers[i] || {}; return `\n${i + 1}. ${c[0]}\nClassification: ${a.classification}\nReason: ${a.reason}` }), `\nRedesign (${state.redesignCase}):\n${state.redesign}\n\nReflection:\n${state.reflection}`].join('\n'); let url = URL.createObjectURL(new Blob([out], { type: 'text/plain;charset=utf-8' })); let link = document.createElement('a'); link.href = url; link.download = 'IRB-challenge-responses.txt'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000) }; document.getElementById('reset').onclick = () => { if (confirm('Clear all saved answers and restart?')) { state = { page: 'learn', i: 0, answers: [], name: '', redesign: '', reflection: '' }; go('learn') } }
+        }
+        render();</script>
+</body>
+
+</html>
